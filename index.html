@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Индивидуальные тренировки</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libertinus+Mono&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.css"/> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
+
+  <style>
+    /* базовые стили появления */
+    .hidden {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="about" style="z-index: 100;">
+    <a href="#section1" class="sliding-button">О ТРЕНЕРЕ</a>
+    <a href="#section2" class="sliding-button">Контакты</a>
+    <a href="#"  id="club"class="sliding-button">клуб воин</a>
+  </div>
+
+  <div class="container">
+    <h1 class="fade-in hidden">Индивидуальные тренировки</h1>
+    <h2 class="fade-in hidden">Для взрослых и детей любого возраста</h2>
+
+    <img id="photo" src="fotki/ww.jpeg" alt="Trainer Image" class="fade-in hidden">
+
+    <h2 class="fade-in hidden">Достижения тренера:</h2>
+    <div class="contact-info">
+      <ul id="section1">
+        <li class="fade-in hidden">Победитель Первенства Мира по муай-тай (тайскому боксу)</li>
+        <li class="fade-in hidden">Победитель Первенства Мира по Всестилевому Карате</li>
+        <li class="fade-in hidden">Победитель Первенства России по муай-тай</li>
+        <li class="fade-in hidden">Победитель Первенства России по Панкратиону</li>
+        <li class="fade-in hidden">Победитель Всероссийских соревнований на призы «Спартака»</li>
+        <li class="fade-in hidden">Кандидат в Мастера Спорта по: Муай-тай, Классический бокс и MMA</li>
+      </ul>
+    </div>
+
+    <div class="carera">
+      <p class="highlight"><strong class="fade-in hidden">Любительская карьера более 10 лет!</strong></p>
+    </div>
+
+    <div class="contact-info">
+      <h2 class="fade-in hidden">Контактная информация:</h2>
+      <p class="fade-in hidden"><b>Место проведения:</b> г. Оренбург, ул. Ноябрьская 43/2, клуб Единоборств ВОИН</p>
+      <p class="fade-in hidden"><b>Телефон:</b> +79871924877</p>
+    </div>
+
+    <!-- Карта -->
+    <div class="carta1 hidden">
+      <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A3adec5f44e595617c309336202fbdfe48d1725a4f70227d68e0db034f32d3253&amp;width=100%25&amp;height=430&amp;lang=ru_RU&amp;scroll=true"></script> 
+    </div>
+
+    <!-- Соцсети -->
+    <div class="seti hidden" >
+      <div class="icons" id="section2">
+        <a href="https://vk.com/egorsluzaev">
+          <div class="layer">
+            <span></span><span></span><span></span><span></span>
+            <span class="fab fa-vk"></span>
+          </div>
+          <div class="text">VK</div>
+        </a>
+        <a href="https://t.me/Sluzaev_77">
+          <div class="layer">
+            <span></span><span></span><span></span><span></span>
+            <span class="fab fa-telegram"></span>
+          </div>
+          <div class="text">Telegram</div>
+        </a>
+        <a href="#">
+          <div class="layer">
+            <span></span><span></span><span></span><span></span>
+            <span class="fab fa-instagram"></span>
+          </div>
+          <div class="text">Instagram</div>
+        </a>
+        <a href="#">
+          <div class="layer">
+            <span></span><span></span><span></span><span></span>
+            <span class="fab fa-tiktok"></span>
+          </div>
+          <div class="text">TikTok</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
+  <script>
+    // fancybox
+    document.getElementById("photo").addEventListener("click", () => {
+      Fancybox.show([
+        {
+          src: "fotki/ww.jpeg",
+          type: "image",
+        },
+          {
+            src: "fotki/IMG_5304.MP4",
+          }
+      ]);
+    });
+    // fancybox
+    document.getElementById("club").addEventListener("click", () => {
+      Fancybox.show([
+        {
+          src: "https://avatars.mds.yandex.net/get-altay/2433982/2a0000017535f56a19a736527cf5c1cab85b/L_height",
+          type: "image",
+        },
+        {
+          src: "https://avatars.mds.yandex.net/get-altay/6145759/2a00000182d0fa54eade4640a7119e17f7c3/L_height",
+          type: "image",
+        }
+       
+      ]);
+    });
+
+    // IntersectionObserver для всех .hidden
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
